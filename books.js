@@ -1,45 +1,46 @@
-const { v4: getNewId } = require('uuid')
-
 const books = [{
-  id: getNewId(),
+  id: Date.now(),
   title: '1984',
-  author: 'Джордж Оруэлл',
+  author: 'Джорж Оруэлл',
 }]
 
 const createBook = ({
+  id,
   title,
   description,
   author,
   favorite,
   fileCover,
   fileName,
+  fileBook,
 }) => {
-  const newId = getNewId()
+  if (!id || !title) return
 
   books.push({
-    id: newId,
+    id,
     title,
     description,
     author,
     favorite,
     fileCover,
     fileName,
+    fileBook,
   })
 
-  return books.find(({ id }) => id === newId)
+  return books.find((book) => book.id === id)
 }
 
 const getAllBooks = () => books
 
-const getBook = id => books.find(book => book.id === id)
+const getBook = (id) => books.find((book) => book.id === id)
 
-const deleteBook = id => {
-  const index = books.findIndex(book => book.id === id)
+const deleteBook = (id) => {
+  const index = books.findIndex((book) => book.id === id)
   return !!books.splice(index, 1).length
 }
 
 const updateBook = (id, bookData) => {
-  const index = books.findIndex(book => book.id === id)
+  const index = books.findIndex((book) => book.id === id)
 
   if (index === -1) return false
 
@@ -51,4 +52,6 @@ const updateBook = (id, bookData) => {
   return true
 }
 
-module.exports = { createBook, getAllBooks, getBook, deleteBook, updateBook }
+module.exports = {
+  createBook, getAllBooks, getBook, deleteBook, updateBook,
+}
