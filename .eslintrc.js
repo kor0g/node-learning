@@ -8,10 +8,9 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   extends: ['airbnb-base'],
-  plugins: [],
+  plugins: ['import'],
   rules: {
     semi: ['error', 'never'],
-    'prefer-template': 0,
     'consistent-return': 0,
   },
 }

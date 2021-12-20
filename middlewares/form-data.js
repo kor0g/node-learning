@@ -1,8 +1,6 @@
 const multer = require('multer')
 const fs = require('fs')
 
-const { createBook } = require('../books')
-
 const getExt = (mimetype) => mimetype.split('/')[1]
 
 const usploadsDir = 'uploads/'
@@ -23,7 +21,7 @@ const fileFilter = (req, file, cb) => {
   const needSave = extensions.includes(fileExtension)
 
   if (!needSave) {
-    req.fileUploadError = 'Alowed extensions: ' + extensions.join(', ')
+    req.fileUploadError = `Alowed extensions: ${extensions.join(', ')}`
   }
 
   cb(null, needSave)
@@ -36,24 +34,4 @@ const setBookId = (req, res, next) => {
   next()
 }
 
-const createBookHandler = (req, res) => {
-  const {
-    body, bookId, fileUploadError, file,
-  } = req
-
-  const newBook = createBook({ id: bookId, ...body, fileBook: file?.path })
-
-  if (!newBook) {
-    res.status(404).json({ message: 'Can not create book' })
-  }
-
-  res.json({ data: newBook, fileUploadError })
-}
-
-const createBookHandlers = [
-  setBookId,
-  upload.single('fileBook'),
-  createBookHandler,
-]
-
-module.exports = { createBookHandlers }
+module.exports = { upload, setBookId }

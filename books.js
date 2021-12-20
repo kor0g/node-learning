@@ -1,30 +1,25 @@
 const books = [{
-  id: Date.now(),
+  id: '123',
   title: '1984',
   author: 'Джорж Оруэлл',
+  cover: 'uploads\\123.jpeg',
 }]
 
 const createBook = ({
   id,
   title,
-  description,
   author,
-  favorite,
-  fileCover,
-  fileName,
-  fileBook,
+  description,
+  cover,
 }) => {
   if (!id || !title) return
 
   books.push({
     id,
     title,
-    description,
     author,
-    favorite,
-    fileCover,
-    fileName,
-    fileBook,
+    description,
+    cover,
   })
 
   return books.find((book) => book.id === id)
