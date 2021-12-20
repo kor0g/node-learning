@@ -1,0 +1,20 @@
+<div>
+  <table class="table">
+    <thead>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Description</th>
+      <th>Cover</th>
+    </thead>
+    <tbody>
+      <% data.map(({ id, title, author, description }) => { %>
+        <tr class="align-middle">
+            <td><a href="/<%= id %>"><%= title %></td>
+            <td><%= author %></td>
+            <td><%= description %></td>
+            <td><img alt="Book cover" width="100px" src="/api/books/<%= id %>/download"></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
