@@ -4,7 +4,7 @@
 
 1. docker pull busybox
 2. docker run --name pinger -it busybox ping -c 7 netology.ru
-3. docker ps -a
+3. docker ps -a<br>
 ```0412217fed95   busybox           "ping netology.ru"       3 minutes ago   Exited (137) 2 minutes ago                            pinger ```
 4. docker logs pinger
 ```
@@ -40,17 +40,17 @@ round-trip min/avg/max = 35.047/69.533/81.699 ms
 7 packets transmitted, 7 packets received, 0% packet loss
 round-trip min/avg/max = 40.178/69.687/81.633 ms
 ```
-8. docker logs ping
+8. docker logs ping<br>
 ```7```
 9. docker rm pinger
 10. docker rmi busybox
 
 ## Задание 2 - Environment Variables
 
-1. docker pull node:15.14
-2.1. docker build -t mynodeimg .
-2.2. docker run --env NAME=Oleg --env SURNAME=Korn --rm --name mynode -it mynodeimg
-3. Вывел 
+1. docker pull node:15.14<br>
+2.1. docker build -t mynodeimg .<br>
+2.2. docker run --env NAME=Oleg --env SURNAME=Korn --rm --name mynode -it mynodeimg<br>
+3. Вывел Привет, Oleg Korn!
 4. docker stop mynode
 5. docker rmi node
 
@@ -59,11 +59,11 @@ round-trip min/avg/max = 40.178/69.687/81.633 ms
 1. docker pull node:15.14
 2. docker run -d -v /data:/var/first/data --name first_node -it node
 3. docker run -d -v /data:/var/second/data --name second_node -it node
-4. docker exec -it first_node /bin/bash
+4. docker exec -it first_node /bin/bash<br>
    : touch /var/first/data/file.txt
 5. добавил file2.txt
-6. docker exec -it second_node /bin/bash
-   : ls /var/second/data
+6. docker exec -it second_node /bin/bash<br>
+   : ls /var/second/data<br>
    ```file.txt```
 7. docker stop first_node second_node
 8. docker rm -f first_node second_node
