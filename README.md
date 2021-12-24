@@ -45,3 +45,26 @@ round-trip min/avg/max = 40.178/69.687/81.633 ms
 9. docker rm pinger
 10. docker rmi busybox
 
+## Задание 2 - Environment Variables
+
+1. docker pull node:15.14
+2.1. docker build -t mynodeimg .
+2.2. docker run --env NAME=Oleg --env SURNAME=Korn --rm --name mynode -it mynodeimg
+3. Вывел 
+4. docker stop mynode
+5. docker rmi node
+
+## Задание 3 - Volumes
+
+1. docker pull node:15.14
+2. docker run -d -v /data:/var/first/data --name first_node -it node
+3. docker run -d -v /data:/var/second/data --name second_node -it node
+4. docker exec -it first_node /bin/bash
+   : touch /var/first/data/file.txt
+5. добавил file2.txt
+6. docker exec -it second_node /bin/bash
+   : ls /var/second/data
+   ```file.txt```
+7. docker stop first_node second_node
+8. docker rm -f first_node second_node
+9. docker rmi node
