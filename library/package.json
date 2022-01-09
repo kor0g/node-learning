@@ -1,0 +1,33 @@
+{
+  "name": "node-learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "cross-fetch": "^3.1.4",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "multer": "^1.4.4",
+    "node-fetch": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -r dotenv/config src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kor0g/node-learning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kor0g/node-learning/issues"
+  },
+  "homepage": "https://github.com/kor0g/node-learning#readme"
+}

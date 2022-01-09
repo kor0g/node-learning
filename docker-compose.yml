@@ -1,0 +1,20 @@
+services:
+  redis:
+    image: redis
+  counter:
+    build: ./counter
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis
+    depends_on:
+      - redis
+  library:
+    build: ./library
+    ports: 
+      - 3001:3000
+    environment:
+      - PORT=3000
+      - COUNTER_URL=counter
+      

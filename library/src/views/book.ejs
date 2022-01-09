@@ -1,0 +1,13 @@
+<h3>Title: <%= data.title %></h3>
+<h3>Author: <%= data.author %></h3>
+<h3>Description: <%= data.description %></h3>
+<div>Просмотры: <%= data.views %></div>
+<h3>Cover: <img height="200px" src="/api/books/<%= data.id %>/download" /></h3>
+<div>
+  <a href="/edit/<%= data.id %>">
+    <button class="btn btn-primary">Edit</button>
+  </a>
+  <form method="POST" action="/api/books/delete/<%= data.id %>">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>

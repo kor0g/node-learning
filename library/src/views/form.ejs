@@ -1,0 +1,13 @@
+<form method="post" action="<%= action %>" enctype="multipart/form-data">
+  <div class="w-50">
+    <input class="form-control" name="title" placeholder="Title" value="<%= data.title %>"/>
+    <br />
+    <input class="form-control" name="author" placeholder="Author" value="<%= data.author %>"/>
+    <br />
+    <input class="form-control" name="cover" placeholder="Cover" type="file" />
+    <br />
+    <textarea class="form-control" name="description" placeholder="Description"><%= data.description %></textarea>
+    <br />
+    <button type="submit" class="btn btn-primary">Send</button>
+  </div>
+</form>
