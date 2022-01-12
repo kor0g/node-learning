@@ -8,8 +8,8 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "multer": "^1.4.4",
-    "node-fetch": "^3.1.0"
+    "mongoose": "^6.1.6",
+    "multer": "^1.4.4"
   },
   "devDependencies": {
     "eslint": "^8.5.0",
@@ -18,7 +18,9 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config src/index.js"
+    "dev": "nodemon -r dotenv/config src/index.js",
+    "docker:mongo": "docker-compose up --build",
+    "docker:atlas": "docker-compose -f docker-compose-atlas.yml up --build"
   },
   "repository": {
     "type": "git",

@@ -29,9 +29,4 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter })
 
-const setBookId = (req, res, next) => {
-  req.bookId = String(Date.now())
-  next()
-}
-
-module.exports = { upload, setBookId }
+module.exports = { upload }
