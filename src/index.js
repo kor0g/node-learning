@@ -1,13 +1,23 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+const session = require('express-session')
 
-const apiRouter = require('./routes/api')
+const passport = require('./passport')
 const viewRouter = require('./routes/view')
+const apiRouter = require('./routes/api')
 
 const app = express()
 
 app.set('view engine', 'ejs')
 app.set('views', `${__dirname}/views`)
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.static(`${__dirname}/public`))
 
 app.use('/', viewRouter)
 app.use('/api', apiRouter)

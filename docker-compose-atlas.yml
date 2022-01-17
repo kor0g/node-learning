@@ -8,4 +8,5 @@ services:
       - DB_MODE=atlas
     env_file:
       - .atlas.env
+      - .env
 
