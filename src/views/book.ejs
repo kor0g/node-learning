@@ -11,3 +11,51 @@
     <button type="submit" class="btn btn-danger">Delete</button>
   </form>
 </div>
+<br />
+<h4>Comments:</h4>
+<br />
+<div id="list" class="list-group"></div>
+<br />
+<hr />
+<br />
+<h5>Leave comment:</h5>
+<div>
+  <div class="w-50">
+    <br />
+    <input class="form-control" placeholder="Author" id="author" />
+    <br />
+    <textarea class="form-control" placeholder="Comment" id="comment"></textarea>
+    <br />
+    <button type="submit" class="btn btn-primary" id="send-comment">Send</button>
+  </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const roomName = location.pathname.split('/').pop()
+  const socket = io.connect('/', { query: `roomName=${roomName}` })
+  const boxList = document.querySelector('#list')
+  const authorInput = document.querySelector('#author')
+  const commentInput = document.querySelector('#comment')
+  const sendCommentBtn = document.querySelector('#send-comment')
+
+  const getTmp = (msg) => `
+    <div class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <small>${msg.author}</small>
+        </div>
+        <p class="mb-1">${msg.comment}</p>
+    </div>
+  `
+
+  socket.on('comments', (msg) => {
+      const div = getTmp(msg)
+      boxList.insertAdjacentHTML('beforeend', div)
+  })
+
+  sendCommentBtn.addEventListener('click', () => {
+      socket.emit('comments', {
+          author: authorInput.value,
+          comment: commentInput.value,
+      })
+  })
+</script>

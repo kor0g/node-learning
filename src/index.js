@@ -2,12 +2,34 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const http = require('http')
+const socketIO = require('socket.io')
 
 const passport = require('./passport')
 const viewRouter = require('./routes/view')
 const apiRouter = require('./routes/api')
 
 const app = express()
+const server = http.Server(app)
+const io = socketIO(server)
+
+io.on('connection', (socket) => {
+  const { id } = socket
+  console.log(`Socket connected: ${id}`)
+
+  const { roomName } = socket.handshake.query
+  console.log(`Socket roomName: ${roomName}`)
+  socket.join(roomName)
+  socket.on('comments', (msg) => {
+    msg.type = `room: ${roomName}`
+    socket.to(roomName).emit('comments', msg)
+    socket.emit('comments', msg)
+  })
+
+  socket.on('disconnect', () => {
+    console.log(`Socket disconnected: ${id}`)
+  })
+})
 
 app.set('view engine', 'ejs')
 app.set('views', `${__dirname}/views`)
@@ -47,7 +69,7 @@ const start = async () => {
   try {
     await connect[process.env.DB_MODE || 'default']()
 
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       console.log('Server running on port:', PORT)
     })
   } catch (err) {
